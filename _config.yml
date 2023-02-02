@@ -1,0 +1,12 @@
+title: NLV Modellflug Saarmund e.V.
+email: info@nlvms.de
+description: Modellflugverein in Saarmund
+baseurl: ""
+url: ""
+github: [metadata]
+
+# Build settings
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+plugins:
+  - jekyll-feed
+  - jekyll-include-cache
