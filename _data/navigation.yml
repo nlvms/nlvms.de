@@ -1,3 +1,5 @@
 main:
+  - title: "Flugplatz"
+    url: /flugplatz/
   - title: "Impressum"
     url: /impressum/
