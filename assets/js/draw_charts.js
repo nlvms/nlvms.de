@@ -87,7 +87,7 @@ function drawCharts(start_day) {
   }
 
   // nothing specified, display the last 24 hours
-  var d = new Date("2019-09-30T10:00:00");
+  var d = new Date();
   if (start_day == 0) {
     d.setDate(d.getDate() - 1);
   } else {
@@ -199,7 +199,7 @@ function drawVBatt() {
 function drawChart(type, options, start_ts, end_ts, onready) {
   var chartDiv = document.getElementById(type + "-chart");
 
-  var dataUrl = "http://5106660.swh.strato-hosting.eu/get_data.php?item=" +
+  var dataUrl = "https://camdb.nlvms.de/php/get_data.php?item=" +
     type;
   if (start_ts) dataUrl += "&start=" + start_ts;
   if (end_ts) dataUrl += "&end=" + end_ts;

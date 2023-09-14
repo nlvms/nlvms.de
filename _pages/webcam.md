@@ -31,8 +31,7 @@ layout: splash
 <script>
   $(document).ready(function() {
     //create buttons
-    var d = new Date("2019-09-30T10:00:00");
-    console.log(d)
+    var d = new Date();
     var days = ['Sonntag','Montag','Dienstag','Mittwoch',
                'Donnerstag','Freitag','Samstag'];
 
