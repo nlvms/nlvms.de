@@ -1,6 +1,12 @@
 main:
   - title: "Flugplatz"
     url: /flugplatz/
+  - title: "Wetter"
+    url: /wetter/
+  - title: "Webcam"
+    url: /webcam/
+  - title: "Wind"
+    url: /wind/
   - title: "Download"
     url: /download/
   - title: "Impressum"
