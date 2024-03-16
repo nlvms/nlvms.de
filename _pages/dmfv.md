@@ -1,7 +1,8 @@
 ---
 permalink: /dmfv/
-title: DMFV Vereinsinfo
 ---
+
+![DMFV logo](/assets/images/DMFV-logo.png)
 
 ### Aktuelle Vereinsinfo
 
