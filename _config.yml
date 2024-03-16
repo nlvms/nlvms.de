@@ -5,11 +5,14 @@ baseurl: ""
 url: ""
 github: [metadata]
 
-theme: "minimal-mistakes-jekyll"
 minimal_mistakes_skin: "dark"
 
 plugins:
   - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
   - jekyll-include-cache
 
 include: ["_pages"]
