@@ -7,6 +7,8 @@ main:
     url: /webcam/
   - title: "Wind"
     url: /wind/
+  - title: "DMFV Vereinsinfo"
+    url: /dmfv/
   - title: "Download"
     url: /download/
   - title: "Impressum"
