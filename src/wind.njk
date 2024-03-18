@@ -7,15 +7,15 @@ meta:
   title: Wind
 ---
 
-<section class="w-fit content-center">
+<section class="content-center">
   <div id="time_select" class="time_select flex justify-center gap-2 w-full flex-wrap">
       <button type="button" class="time_range_button btn btn-selected" value="0">Letzten 24 Stunden</button>
       <button type="button" class="time_range_button btn" value="-1">Gestern</button>
       <!-- Buttons get inserted here -->
   </div>
   <div>
-    <p><div id="wind-chart"></div></p>
-    <p><div id="temp-chart"></div></p>
+    <div id="wind-chart"></div><p/>
+    <div id="temp-chart"></div><p/>
   </div>
 </section>
 
@@ -61,15 +61,15 @@ meta:
       });
     });
 
-    await drawCharts();
+    const charts = await drawCharts();
 
     // create trigger to resizeEnd event
     window.addEventListener("resize", function (e) {
-       if(this.resizeTO) clearTimeout(this.resizeTO);
-       this.resizeTO = setTimeout(function() {
-         const event = new Event("resizeEnd");
-         window.dispatchEvent(event);
-       }, 500);
+      if(this.resizeTO) clearTimeout(this.resizeTO);
+      this.resizeTO = setTimeout(function() {
+        charts.forEach((chart) => chart.clearChart()); 
+        window.dispatchEvent(new Event("resizeEnd"));
+      }, 500);
     });
   }
 

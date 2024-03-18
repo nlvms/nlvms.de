@@ -85,7 +85,6 @@ export async function drawCharts(start_day) {
   if ((typeof start_day === "undefined") || isNaN(start_day)) {
     start_day = 0;
   }
-
   // nothing specified, display the last 24 hours
   var d = new Date();
   if (start_day == 0) {
@@ -135,7 +134,8 @@ export async function drawCharts(start_day) {
     lineWidth: 1,
   };
 
-  await drawChart("wind", wind_options, start_ts, end_ts, drawWindArrows);
+  const charts = new Array();
+  charts.push(await drawChart("wind", wind_options, start_ts, end_ts, drawWindArrows));
 
   var temp_options = {
     colors: ["LightSkyBlue"],
@@ -166,12 +166,12 @@ export async function drawCharts(start_day) {
     lineWidth: 1,
   };
 
-  await drawChart("temp", temp_options, start_ts, end_ts, null);
+  charts.push(await drawChart("temp", temp_options, start_ts, end_ts, null));
+  return charts;
 }
 
 async function drawChart(type, options, start_ts, end_ts, onready) {
   var chartDiv = document.getElementById(type + "-chart");
-
   var dataUrl = "https://camdb.nlvms.de/php/get_data.php?item=" + type;
   if (start_ts) dataUrl += "&start=" + start_ts;
   if (end_ts) dataUrl += "&end=" + end_ts;
@@ -184,30 +184,19 @@ async function drawChart(type, options, start_ts, end_ts, onready) {
       pattern: "EEEE HH:mm",
     });
     dateFormatter.format(data, 0);
-
     const chart = new google.visualization.LineChart(chartDiv);
     if (onready) {
       google.visualization.events.addListener(chart, "ready", function () {
         onready(chart, chartDiv, jsonData, start_ts, end_ts);
       });
     }
-
-    function drawSizedChart() {
-      // console.log(window.innerWidth);
-      // const chartWidth = window.innerWidth >= 1024 ?
-      //     (window.innerWidth * 0.80)
-      //   : (window.innerWidth * 0.90);
-      // const chartHeight = chartWidth * 2 / 8;
-      // chart.draw(data, { ...options, width: chartWidth, height: chartHeight });
-      chart.draw(data, options);
-    }
-
-    drawSizedChart();
+    chart.draw(data, options);
 
     // redraw graph when window resize is completed
     window.addEventListener("resizeEnd", function () {
-      drawSizedChart();
+      chart.draw(data, options);
     });
+    return chart;
   } catch(err) {
     google.visualization.errors.addError(
       chartDiv,
