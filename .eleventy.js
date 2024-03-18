@@ -6,13 +6,11 @@ const Image = require("@11ty/eleventy-img");
 const yaml = require("js-yaml"); // Because yaml is nicer than json for editors
 require('dotenv').config();
 
-const baseUrl = process.env.BASE_URL || "http://localhost:8080";
-console.log('baseUrl is set to ...', baseUrl);
-
+const baseUrl = process.env.BASE_URL || "https://nlvms.de";
 const globalSiteData = {
   title: "NLV Modellflug Saarmund e.V.",
   description: "Modellflugverein in Saarmund",
-  locale: 'en',
+  locale: 'de_DE',
   baseUrl: baseUrl,
 }
 
