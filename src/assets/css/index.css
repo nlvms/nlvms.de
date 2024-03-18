@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column
+  }
+
+  #header {
+    border-bottom: 1px solid #51555d;
+  }
+
+  #main {
+    @apply py-4 px-4 space-y-8 mx-auto;
+    ul {
+      list-style: disc;
+    }
+  }
+
+  #header li.active {
+    @apply underline;
+  }
+
+  .btn {
+    @apply px-2 rounded-md bg-gray-200 text-black
+  }
+
+  .btn-selected {
+    @apply bg-teal-500 text-gray-200
+  }
+}
