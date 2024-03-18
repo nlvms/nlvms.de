@@ -1,10 +1,10 @@
-const path = require("path");
-const pluginRss = require("@11ty/eleventy-plugin-rss"); // needed for absoluteUrl SEO feature
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
-const Image = require("@11ty/eleventy-img");
-const { DateTime } = require("luxon");
-const excerpts = require("excerpts");
-require("dotenv").config();
+import path from "node:path";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import eleventyVitePlugin from "@11ty/eleventy-plugin-vite";
+import Image from "@11ty/eleventy-img";
+import { DateTime } from "luxon";
+import excerpts from "excerpts";
 
 const baseUrl = process.env.BASE_URL || "https://nlvms.de";
 const globalSiteData = {
@@ -15,7 +15,7 @@ const globalSiteData = {
   baseUrl: baseUrl,
 };
 
-module.exports = async function (eleventyConfig) {
+export default function (eleventyConfig) {
   /* --- GLOBAL DATA --- */
 
   eleventyConfig.addGlobalData("site", globalSiteData);
@@ -30,8 +30,6 @@ module.exports = async function (eleventyConfig) {
 
   eleventyConfig.addPlugin(pluginRss); // just includes absolute url helper function
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
-
-  const eleventyVitePlugin = (await import("@11ty/eleventy-plugin-vite")).default;
   eleventyConfig.addPlugin(eleventyVitePlugin);
 
   /* --- SHORTCODES --- */
