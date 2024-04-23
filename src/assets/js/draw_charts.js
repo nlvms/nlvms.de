@@ -17,13 +17,23 @@ function drawWindArrows(chart, chartDiv, jsonTable, start_ts, end_ts) {
   var top = chartArea.top;
 
   // Trying to fit approx. ARROWS_PER_CHART arrows...
-  var size = (chartArea.width / ARROWS_PER_CHART) *
-    0.60; // ... and give it some slack
+  var size = (chartArea.width / ARROWS_PER_CHART) * 0.6; // ... and give it some slack
 
-  var path_str = "," + (top - (size / 4)) +
-    " " + (size / 6) + "," + (-size / 4) +
-    " " + (-size / 6) + "," + size +
-    " " + (-size / 6) + "," + (-size) +
+  var path_str =
+    "," +
+    (top - size / 4) +
+    " " +
+    size / 6 +
+    "," +
+    -size / 4 +
+    " " +
+    -size / 6 +
+    "," +
+    size +
+    " " +
+    -size / 6 +
+    "," +
+    -size +
     "z";
 
   function getTS(idx) {
@@ -60,8 +70,8 @@ function drawWindArrows(chart, chartDiv, jsonTable, start_ts, end_ts) {
     // too far from searched point
     // or end of table reached
     if (
-      (curr_match_diff > ts_interval / 4) ||
-      (curr_match_idx >= jsonTable.rows.length)
+      curr_match_diff > ts_interval / 4 ||
+      curr_match_idx >= jsonTable.rows.length
     ) {
       continue;
     }
@@ -82,7 +92,7 @@ function drawWindArrows(chart, chartDiv, jsonTable, start_ts, end_ts) {
 }
 
 export async function drawCharts(start_day) {
-  if ((typeof start_day === "undefined") || isNaN(start_day)) {
+  if (typeof start_day === "undefined" || isNaN(start_day)) {
     start_day = 0;
   }
   // nothing specified, display the last 24 hours
@@ -99,7 +109,7 @@ export async function drawCharts(start_day) {
 
   var start_ts = d.getTime() / 1000;
   var end_ts = start_ts + 24 * 60 * 60;
-  
+
   var wind_options = {
     title: "Wind (km/h)",
     backgroundColor: "transparent",
@@ -120,7 +130,7 @@ export async function drawCharts(start_day) {
       minorGridlines: { color: "666666" },
     },
     legend: {
-      position: 'bottom',
+      position: "bottom",
       textStyle: { color: "FFFFFF" },
     },
     chartArea: { width: "90%" },
@@ -135,7 +145,9 @@ export async function drawCharts(start_day) {
   };
 
   const charts = new Array();
-  charts.push(await drawChart("wind", wind_options, start_ts, end_ts, drawWindArrows));
+  charts.push(
+    await drawChart("wind", wind_options, start_ts, end_ts, drawWindArrows),
+  );
 
   var temp_options = {
     colors: ["LightSkyBlue"],
@@ -197,10 +209,7 @@ async function drawChart(type, options, start_ts, end_ts, onready) {
       chart.draw(data, options);
     });
     return chart;
-  } catch(err) {
-    google.visualization.errors.addError(
-      chartDiv,
-      err.message,
-    );
-  };
+  } catch (err) {
+    google.visualization.errors.addError(chartDiv, err.message);
+  }
 }

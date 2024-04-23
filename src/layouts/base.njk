@@ -1,28 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ meta.lang or site.lang }}">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ site.title }} - {{ title or meta.title }}</title>
-    {% include "meta.njk" %}
-    <link rel="stylesheet" href="/assets/css/index.css"/>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ site.title }} - {{ title or meta.title }}</title>
+        {% include "meta.njk" %}
+        <link rel="stylesheet" href="/assets/css/index.css" />
+    </head>
 
-  <body class="bg-gray-800 text-gray-200">
+    <body class="bg-gray-800 text-gray-200">
+        {% include "header.njk" %}
 
-    {% include "header.njk" %}
+        {% if header.image %}
+            {% image header.image, "alt text" %}
+        {% endif %}
 
-    {% if header.image %}
-      {% image header.image, "alt text" %}
-    {% endif %}
+        <main id="main">
+            <article
+                class="prose prose-invert lg:min-w-[872px] xl:min-w-[1024px]"
+            >
+                {{ content | safe }}
+            </article>
+        </main>
 
-    <main id="main">
-      <article class="prose prose-invert lg:min-w-[872px] xl:min-w-[1024px]">
-      {{ content | safe }}
-      </article>
-    </main>
-
-    {% include "footer.njk" %}
-
-  </body>
+        {% include "footer.njk" %}
+    </body>
 </html>

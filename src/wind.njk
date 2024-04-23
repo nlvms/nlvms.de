@@ -1,78 +1,98 @@
 ---
 layout: base
 eleventyNavigation:
-  key: Wind
-  order: 4
+    key: Wind
+    order: 4
 meta:
-  title: Wind
+    title: Wind
 ---
 
 <section class="content-center">
-  <div id="time_select" class="time_select flex justify-center gap-2 w-full flex-wrap">
-      <button type="button" class="time_range_button btn btn-selected" value="0">Letzten 24 Stunden</button>
-      <button type="button" class="time_range_button btn" value="-1">Gestern</button>
-      <!-- Buttons get inserted here -->
-  </div>
-  <div>
-    <div id="wind-chart"></div><p/>
-    <div id="temp-chart"></div><p/>
-  </div>
+    <div
+        id="time_select"
+        class="time_select flex justify-center gap-2 w-full flex-wrap"
+    >
+        <button
+            type="button"
+            class="time_range_button btn btn-selected"
+            value="0"
+        >
+            Letzten 24 Stunden
+        </button>
+        <button type="button" class="time_range_button btn" value="-1">
+            Gestern
+        </button>
+        <!-- Buttons get inserted here -->
+    </div>
+    <div>
+        <div id="wind-chart"></div>
+        <p />
+        <div id="temp-chart"></div>
+        <p />
+    </div>
 </section>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="module" src="/assets/js/draw_charts.js"></script>
 
 <script type="module">
-  import { drawCharts } from "/assets/js/draw_charts.js";
+    import { drawCharts } from "/assets/js/draw_charts.js";
 
-  async function prepareCharts() {
-    // helper function
-    function appendButton(elementId, value, content){
-  	  var button = document.createElement("button");
-      button.className = "time_range_button btn";
-      button.value = value;
-      button.innerText = content;
-    	document.getElementById(elementId).appendChild(button);
+    async function prepareCharts() {
+        // helper function
+        function appendButton(elementId, value, content) {
+            var button = document.createElement("button");
+            button.className = "time_range_button btn";
+            button.value = value;
+            button.innerText = content;
+            document.getElementById(elementId).appendChild(button);
+        }
+
+        // create buttons
+        var d = new Date();
+        var days = [
+            "Sonntag",
+            "Montag",
+            "Dienstag",
+            "Mittwoch",
+            "Donnerstag",
+            "Freitag",
+            "Samstag",
+        ];
+
+        var offset = -2;
+        d.setDate(d.getDate() + offset);
+        for (var i = 0; i < 5; i++) {
+            appendButton("time_select", offset.toString(), days[d.getDay()]);
+            offset--;
+            d.setDate(d.getDate() - 1);
+        }
+
+        const timeSelect = document.getElementById("time_select");
+        const buttons = Array.from(timeSelect.children);
+        buttons.forEach(async (button) => {
+            button.addEventListener("click", async (e) => {
+                const buttons = Array.from(
+                    timeSelect.getElementsByClassName("btn-selected"),
+                );
+                buttons.forEach((b) => b.classList.remove("btn-selected"));
+                e.currentTarget.classList.add("btn-selected");
+                await drawCharts(parseInt(e.currentTarget.value));
+            });
+        });
+
+        const charts = await drawCharts();
+
+        // create trigger to resizeEnd event
+        window.addEventListener("resize", function (e) {
+            if (this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function () {
+                charts.forEach((chart) => chart.clearChart());
+                window.dispatchEvent(new Event("resizeEnd"));
+            }, 500);
+        });
     }
 
-    // create buttons
-    var d = new Date();
-    var days = ['Sonntag','Montag','Dienstag','Mittwoch',
-               'Donnerstag','Freitag','Samstag'];
-
-    var offset = -2;
-    d.setDate(d.getDate() + offset);
-    for(var i=0; i<5; i++) {
-      appendButton("time_select", offset.toString(), days[d.getDay()]); 
-      offset--;
-      d.setDate(d.getDate()-1);
-    }
-
-    const timeSelect = document.getElementById("time_select");
-    const buttons = Array.from(timeSelect.children);
-    buttons.forEach(async (button) => {
-      button.addEventListener("click", async (e) => {
-        const buttons = Array.from(timeSelect.getElementsByClassName("btn-selected"));
-        buttons.forEach(
-          (b) => b.classList.remove("btn-selected"),
-        );
-        e.currentTarget.classList.add("btn-selected");
-        await drawCharts(parseInt(e.currentTarget.value));
-      });
-    });
-
-    const charts = await drawCharts();
-
-    // create trigger to resizeEnd event
-    window.addEventListener("resize", function (e) {
-      if(this.resizeTO) clearTimeout(this.resizeTO);
-      this.resizeTO = setTimeout(function() {
-        charts.forEach((chart) => chart.clearChart()); 
-        window.dispatchEvent(new Event("resizeEnd"));
-      }, 500);
-    });
-  }
-
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(prepareCharts);
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(prepareCharts);
 </script>

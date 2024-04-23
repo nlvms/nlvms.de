@@ -1,27 +1,39 @@
-
-
-<header id="header" class="bg-gray-800 text-gray-200 text-xl py-6 px-2">
-  <div class="container mx-auto flex justify-between gap-2 flex-col md:flex-row">
-    <div><a style="text-wrap: nowrap" href="/">{{ site.title }}</a></div>
-    <div>
-      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml({
-
-        listElement: "ul",            
-        listItemElement: "li",        
-
-        listClass: "flex flex-wrap gap-x-4",
-        listItemClass: "",  
-
-        listItemHasChildrenClass: "has-submenu", 
-        anchorClass: "",  
-        
-        activeListItemClass: "active",              
-        activeAnchorClass: "active",        
-
-        activeKey: eleventyNavigation.key,
-        showExcerpt: false
-
-      }) | safe }}
+<header id="header" class="bg-gray-800 text-prose text-xl py-6 px-2">
+    <div class="container mx-auto flex justify-between gap-2 flex-row">
+        <div><a style="text-wrap: nowrap" href="/">{{ site.title }}</a></div>
+        <div class="menu">
+            <input type="checkbox" id="hamburger" />
+            <div class="flex justify-end sm:min-w-[180px]">
+                <label for="hamburger" class="cursor-pointer">
+                    <svg viewBox="0 0 100 80" width="32" height="32">
+                        <g class="fill-prose">
+                            <rect width="100" height="16" rx="10"></rect>
+                            <rect y="30" width="100" height="16" rx="10"></rect>
+                            <rect y="60" width="100" height="16" rx="10"></rect>
+                        </g>
+                    </svg>
+                </label>
+            </div>
+            <nav class="menu-content bg-gray-600">
+                {% set navPages = collections.all | eleventyNavigation %}
+                {% for entry in navPages %}
+                    <a
+                        href="{{ entry.url }}"
+                        class="hover:bg-gray-700
+                    {% if entry.url == page.url %}
+                            underline
+                        {% endif %}
+                    "
+                    >
+                        {{ entry.key }}
+                    </a>
+                {% endfor %}
+            </nav>
+            <script>
+                addEventListener("pageshow", () => {
+                    document.getElementById("hamburger").checked = false;
+                });
+            </script>
+        </div>
     </div>
-  </div>
 </header>
