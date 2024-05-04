@@ -3,7 +3,8 @@ const pluginRss = require("@11ty/eleventy-plugin-rss"); // needed for absoluteUr
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const EleventyVitePlugin = require("@11ty/eleventy-plugin-vite");
 const Image = require("@11ty/eleventy-img");
-const yaml = require("js-yaml"); // Because yaml is nicer than json for editors
+const { DateTime } = require("luxon");
+const excerpts = require("excerpts");
 require("dotenv").config();
 
 const baseUrl = process.env.BASE_URL || "https://nlvms.de";
@@ -11,6 +12,7 @@ const globalSiteData = {
   title: "NLV Modellflug Saarmund e.V.",
   description: "Modellflugverein in Saarmund",
   locale: "de_DE",
+  lang: "de-DE",
   baseUrl: baseUrl,
 };
 
@@ -18,11 +20,6 @@ module.exports = function (eleventyConfig) {
   /* --- GLOBAL DATA --- */
 
   eleventyConfig.addGlobalData("site", globalSiteData);
-
-  /* --- YAML SUPPORT --- */
-
-  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
-  eleventyConfig.addDataExtension("yml", (contents) => yaml.load(contents));
 
   /* --- PASSTHROUGHS --- */
 
@@ -39,8 +36,18 @@ module.exports = function (eleventyConfig) {
   /* --- SHORTCODES --- */
 
   // Image shortcode config
-  let defaultSizesConfig = "(min-width: 1200px) 1400px, 100vw"; // above 1200px use a 1400px image at least, below just use 100vw sized image
+  const defaultImageOptions = {
+    urlPath: "/images/",
+    outputDir: "./_site/images/",
+    filenameFormat: function (_id, src, width, format, _options) {
+      const extension = path.extname(src);
+      const name = path.basename(src, extension);
+      return `${name}-${width}w.${format}`;
+    },
+  };
 
+  // Image shortcode config
+  let defaultSizesConfig = "(min-width: 1200px) 1400px, 100vw"; // above 1200px use a 1400px image at least, below just use 100vw sized image
   eleventyConfig.addShortcode(
     "image",
     async function (src, alt, sizes = defaultSizesConfig) {
@@ -48,13 +55,7 @@ module.exports = function (eleventyConfig) {
       let metadata = await Image(src, {
         widths: [800, 1500],
         formats: ["webp", "jpeg"],
-        urlPath: "/images/",
-        outputDir: "./_site/images/",
-        filenameFormat: function (_id, src, width, format, _options) {
-          const extension = path.extname(src);
-          const name = path.basename(src, extension);
-          return `${name}-${width}w.${format}`;
-        },
+        ...defaultImageOptions,
       });
 
       let imageAttributes = {
@@ -68,10 +69,46 @@ module.exports = function (eleventyConfig) {
     },
   );
 
+  eleventyConfig.addShortcode("miniature", async function (src) {
+    console.log(`Generating miniature(s) from:  ${src}`);
+    let metadata = await Image(src, {
+      widths: [400],
+      formats: ["webp"],
+      ...defaultImageOptions,
+    });
+
+    let data = metadata.webp[0];
+    return data.url;
+  });
+
   // Output year for copyright notices
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
+  // Excerpt
+  eleventyConfig.addShortcode("excerpt", function (article) {
+    const content = article.templateContent;
+    return excerpts(content, { words: 25 });
+  });
+
+  /* --- COLECTIONS --- */
+
+  eleventyConfig.addCollection("posts", function (collection) {
+    return collection.getFilteredByGlob("./src/posts/*.md").reverse();
+  });
+
   /* --- FILTERS --- */
+
+  eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+    // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+    return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
+      format || "dd LLLL yyyy",
+    );
+  });
+
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    // dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  });
 
   // Custom Random Helper Filter (useful for ID attributes)
   eleventyConfig.addFilter("generateRandomIdString", function (prefix) {

@@ -1,4 +1,4 @@
-<header id="header" class="bg-gray-800 text-prose text-xl py-6 px-2">
+<header id="header" class="bg-dark-gray text-prose text-xl py-6 px-2">
     <div class="container mx-auto flex justify-between gap-2 flex-row">
         <div><a style="text-wrap: nowrap" href="/">{{ site.title }}</a></div>
         <div class="menu">
@@ -14,12 +14,12 @@
                     </svg>
                 </label>
             </div>
-            <nav class="menu-content bg-gray-600">
+            <nav class="menu-content bg-dark-gray-light">
                 {% set navPages = collections.all | eleventyNavigation %}
                 {% for entry in navPages %}
                     <a
                         href="{{ entry.url }}"
-                        class="hover:bg-gray-700
+                        class="hover:bg-dark-gray-accent
                     {% if entry.url == page.url %}
                             underline
                         {% endif %}

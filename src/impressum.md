@@ -1,12 +1,12 @@
 ---
-layout: base
-meta:
-  title: Impressum
+title: Impressum
+layout: narrow
 ---
 
 ### Impressum
 
-Für den Inhalt dieser Webseite ist allein der **NLV Modellflug Saarmund e.V.** verantwortlich.
+Für den Inhalt dieser Webseite ist allein der **NLV Modellflug Saarmund e.V.**
+verantwortlich.
 
 #### Vereinsregister
 

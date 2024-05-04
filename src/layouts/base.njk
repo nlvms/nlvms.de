@@ -8,21 +8,9 @@
         <link rel="stylesheet" href="/assets/css/index.css" />
     </head>
 
-    <body class="bg-gray-800 text-gray-200">
+    <body class="bg-dark-gray text-prose">
         {% include "header.njk" %}
-
-        {% if header.image %}
-            {% image header.image, "alt text" %}
-        {% endif %}
-
-        <main id="main">
-            <article
-                class="prose prose-invert lg:min-w-[872px] xl:min-w-[1024px]"
-            >
-                {{ content | safe }}
-            </article>
-        </main>
-
+        {{ content | safe }}
         {% include "footer.njk" %}
     </body>
 </html>

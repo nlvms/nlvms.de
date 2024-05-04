@@ -1,5 +1,5 @@
 ---
-layout: base
+layout: wide
 eleventyNavigation:
   key: Webcam
   order: 3

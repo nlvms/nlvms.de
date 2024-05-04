@@ -1,0 +1,11 @@
+---
+layout: base
+---
+
+{% if header.image %}
+    {% image header.image, "alt text" %}
+{% endif %}
+
+<main id="main">
+    <article class="prose prose-invert">{{ content | safe }}</article>
+</main>

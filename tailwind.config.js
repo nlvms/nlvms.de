@@ -1,8 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
 module.exports = {
   content: ["./src/**/*.{njk,js,html,md,yml,yaml}"],
   theme: {
     extend: {
+      colors: {
+        "dark-gray": {
+          light: colors.gray[600],
+          accent: colors.gray[700],
+          DEFAULT: colors.gray[800],
+        },
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
