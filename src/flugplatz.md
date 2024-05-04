@@ -1,10 +1,9 @@
 ---
-layout: base
+title: Flugplatz
+layout: narrow
 eleventyNavigation:
   key: Flugplatz
   order: 1
-meta:
-  title: Flugplatz
 ---
 
 {% image "src/assets/images/sommertag.jpeg", "Ein schöner Sommertag" %}
