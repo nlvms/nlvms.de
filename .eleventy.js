@@ -50,7 +50,7 @@ module.exports = function (eleventyConfig) {
   let defaultSizesConfig = "(min-width: 1200px) 1400px, 100vw"; // above 1200px use a 1400px image at least, below just use 100vw sized image
   eleventyConfig.addShortcode(
     "image",
-    async function (src, alt, sizes = defaultSizesConfig) {
+    async function (src, alt, options, sizes = defaultSizesConfig) {
       console.log(`Generating image(s) from:  ${src}`);
       let metadata = await Image(src, {
         widths: [800, 1500],
@@ -63,6 +63,7 @@ module.exports = function (eleventyConfig) {
         sizes,
         loading: "lazy",
         decoding: "async",
+        ...options,
       };
 
       return Image.generateHTML(metadata, imageAttributes);
