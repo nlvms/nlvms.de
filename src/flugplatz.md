@@ -4,6 +4,7 @@ layout: narrow
 eleventyNavigation:
   key: Flugplatz
   order: 1
+  icon: map-pin.njk
 ---
 
 {% image "src/assets/images/sommertag.jpeg", "Ein schöner Sommertag" %}

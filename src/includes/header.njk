@@ -3,7 +3,7 @@
         <div><a style="text-wrap: nowrap" href="/">{{ site.title }}</a></div>
         <div class="menu">
             <input type="checkbox" id="hamburger" />
-            <div class="flex justify-end sm:min-w-[180px]">
+            <div class="flex justify-end sm:min-w-[220px]">
                 <label for="hamburger" class="cursor-pointer">
                     <svg viewBox="0 0 100 80" width="32" height="32">
                         <g class="fill-prose">
@@ -25,7 +25,12 @@
                         {% endif %}
                     "
                     >
-                        {{ entry.key }}
+                        {% if entry.icon %}
+                            {% include 'icons/' + entry.icon %}
+                            <span class="ml-2">{{ entry.key }}</span>
+                        {% else %}
+                            {{ entry.key }}
+                        {% endif %}
                     </a>
                 {% endfor %}
             </nav>

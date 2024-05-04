@@ -4,6 +4,7 @@ layout: narrow
 eleventyNavigation:
   key: DMFV Vereinsinfo
   order: 5
+  icon: newspaper.njk
 ---
 
 {% image "src/assets/images/DMFV-logo.png", "DMFV Logo" | safe %}

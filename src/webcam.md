@@ -1,10 +1,10 @@
 ---
+title: Webcam
 layout: wide
 eleventyNavigation:
   key: Webcam
   order: 3
-meta:
-  title: Webcam
+  icon: camera.njk
 ---
 
 ### Webcam
