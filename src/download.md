@@ -4,6 +4,7 @@ layout: narrow
 eleventyNavigation:
   key: Download
   order: 6
+  icon: download.njk
 ---
 
 ### Wichtige Dokumente

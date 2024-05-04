@@ -87,9 +87,10 @@
 
         a {
             float: none;
-            padding: 12px 16px;
-            display: block;
+            padding: 8px 16px;
+            display: flex;
             text-align: left;
+            align-items: center;
         }
     }
 
@@ -101,7 +102,7 @@
         .menu-content {
             left: auto;
             right: auto;
-            min-width: 180px;
+            min-width: 220px;
 
             @apply rounded-xl;
         }
