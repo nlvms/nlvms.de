@@ -15,7 +15,8 @@ Das Bundesministerium für Digitales und Verkehr hat für den Spielort Berlin fo
  
 Von den Flugbeschränkungen kann Saarmund betroffen sein, wenn das Flugbeschränkungsgebiet Berlin 3 aktiviert wird.
  
-Unser Mitglied Achim Friedl hat dazu ein Informationsblatt erstellt, aus dem zu entnehmen ist wie, wann und ob Flugbeschränkungen für den Flugplatz in Saarmund gelten.
+Unser Mitglied Achim Friedl hat dazu ein [Informationsblatt](/assets/pdf/240530_NLV-Saarmund_UEFA-EURO-2024.pdf) erstellt,
+aus dem zu entnehmen ist wie, wann und ob Flugbeschränkungen für den Flugplatz in Saarmund gelten.
  
-Dieses Informationsblatt wird auch am Flugplatz direkt aushängen.
+Dieses [Informationsblatt](/assets/pdf/240530_NLV-Saarmund_UEFA-EURO-2024.pdf) wird auch am Flugplatz direkt aushängen.
  
