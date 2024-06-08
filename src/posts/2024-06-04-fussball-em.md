@@ -20,3 +20,4 @@ aus dem zu entnehmen ist wie, wann und ob Flugbeschränkungen für den Flugplatz
  
 Dieses [Informationsblatt](/assets/pdf/240530_NLV-Saarmund_UEFA-EURO-2024.pdf) wird auch am Flugplatz direkt aushängen.
  
+[Weiter Infos beim DMFV](https://www.dmfv.aero/news-medien/flugbeschraenkung-zur-euro-2024/).
