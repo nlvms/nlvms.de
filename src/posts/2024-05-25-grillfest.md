@@ -8,7 +8,7 @@ Es war ein gelungenes Treffen am 25.05.2024.
 <br/>Am Vortmittag, bei noch recht trüben Wetter, das Zelt und den Grill nebst
 Verpflegung aufgestellt, füllte sich der Parkplatz zum Mittag hin recht schnell.
 Auch das Wetter klarte schnell auf, so dass ab dem frühen Nachmittag die Sonne
-lachte. Bei Bester Stimmung wurde geflogen, gerillt, sich vorgestellt, wieder
+lachte. Bei Bester Stimmung wurde geflogen, gegrillt, sich vorgestellt, wieder
 geflogen, neue Mitglieder kennengelernt, alte Mitglieder begrüßt und weiter
 geflogen...
 <br/>Alles in Allem ein wirklich gelungener Tag, den wir hiermit mit ein paar
