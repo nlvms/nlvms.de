@@ -1,7 +1,6 @@
 const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss"); // needed for absoluteUrl SEO feature
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
-const EleventyVitePlugin = require("@11ty/eleventy-plugin-vite");
 const Image = require("@11ty/eleventy-img");
 const { DateTime } = require("luxon");
 const excerpts = require("excerpts");
@@ -16,7 +15,7 @@ const globalSiteData = {
   baseUrl: baseUrl,
 };
 
-module.exports = function (eleventyConfig) {
+module.exports = async function (eleventyConfig) {
   /* --- GLOBAL DATA --- */
 
   eleventyConfig.addGlobalData("site", globalSiteData);
@@ -31,7 +30,9 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(pluginRss); // just includes absolute url helper function
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
-  eleventyConfig.addPlugin(EleventyVitePlugin, {});
+
+  const eleventyVitePlugin = (await import("@11ty/eleventy-plugin-vite")).default;
+  eleventyConfig.addPlugin(eleventyVitePlugin);
 
   /* --- SHORTCODES --- */
 
