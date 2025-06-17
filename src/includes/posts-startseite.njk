@@ -1,0 +1,43 @@
+<h3>Aktuelles</h3>
+<div class="grid grid-cols-1 gap-8">
+    {% for post in collections.posts | filterByTag("Startseite") %}
+        <div class="card flex flex-col">
+            <div class="grow">
+                <div
+                    class="rounded-t-xl card-img"
+                    {% if post.data.image %}
+                        style="background-image:
+                        url('{% miniature "src" + post.data.image %}');"
+                    {% endif %}
+                >
+                    <div
+                        class="rounded-t-xl pt-4 pl-4 pr-4
+                        {% if post.data.image %}
+                            bg-black/50
+                        {% endif %}"
+                    >
+                        <p class="font-bold text-xl m-0">
+                            <a href="{{ post.url }}" class="no-underline">
+                                {{ post.data.title | safe }}
+                            </a>
+                        </p>
+                        <time
+                            datetime="{{ post.date | htmlDateString }}"
+                            class="text-xs"
+                        >
+                            {{ post.date | readableDate() }}
+                        </time>
+                    </div>
+                </div>
+                <p class="m-0 pb-2 pl-4 pr-4 text-justify">
+                    <i>{% excerpt post %}</i>
+                </p>
+            </div>
+            <div
+                class="flex flex-row place-self-end justify-end pl-4 pr-4 pb-4"
+            >
+                <a href="{{ post.url }}" class="text-xs">more</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
