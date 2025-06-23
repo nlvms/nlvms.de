@@ -179,7 +179,39 @@ export async function drawCharts(start_day) {
   };
 
   charts.push(await drawChart("temp", temp_options, start_ts, end_ts, null));
+
+var hum_options = {
+    colors: ["LightSkyBlue"],
+    title: "Luftfeuchtigkeit (\u0025)",
+    titleTextStyle: { color: "FFFFFF" },
+    backgroundColor: "transparent",
+    hAxis: {
+      format: "HH:mm",
+      minValue: new Date(start_ts * 1000),
+      maxValue: new Date(end_ts * 1000),
+      textStyle: { color: "FFFFFF" },
+      gridlines: { color: "444444" },
+    },
+    vAxis: {
+      format: "##",
+      textStyle: { color: "FFFFFF" },
+      gridlines: { color: "444444" },
+      minorGridlines: { color: "666666" },
+    },
+    legend: { position: "none" },
+    chartArea: { width: "90%" },
+    crosshair: {
+      orientation: "vertical",
+      trigger: "focus",
+      focused: { color: "#A5A5A5", opacity: "0.5" },
+    },
+    focusTarget: "category",
+    lineWidth: 1,
+  };
+
+  charts.push(await drawChart("hum", hum_options, start_ts, end_ts, null));
   return charts;
+
 }
 
 async function drawChart(type, options, start_ts, end_ts, onready) {
