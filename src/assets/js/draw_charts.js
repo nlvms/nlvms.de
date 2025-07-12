@@ -96,7 +96,7 @@ export async function drawCharts(start_day) {
     start_day = 0;
   }
   // nothing specified, display the last 24 hours
-  var d = new Date();
+  const d = new Date();
   if (start_day == 0) {
     d.setDate(d.getDate() - 1);
   } else {
@@ -107,11 +107,10 @@ export async function drawCharts(start_day) {
     d.setDate(d.getDate() + start_day);
   }
 
-  var start_ts = d.getTime() / 1000;
-  var end_ts = start_ts + 24 * 60 * 60;
+  const start_ts = d.getTime() / 1000;
+  const end_ts = start_ts + 24 * 60 * 60;
 
-  var wind_options = {
-    title: "Wind (km/h)",
+  const base_options = {
     backgroundColor: "transparent",
     titleTextStyle: { color: "FFFFFF" },
     hAxis: {
@@ -122,16 +121,9 @@ export async function drawCharts(start_day) {
       gridlines: { color: "444444" },
     },
     vAxis: {
-      format: "###",
-      minValue: 0,
-      viewWindow: { min: 0 },
       textStyle: { color: "FFFFFF" },
       gridlines: { color: "444444" },
       minorGridlines: { color: "666666" },
-    },
-    legend: {
-      position: "bottom",
-      textStyle: { color: "FFFFFF" },
     },
     chartArea: { width: "90%" },
     crosshair: {
@@ -140,8 +132,23 @@ export async function drawCharts(start_day) {
       focused: { color: "#A5A5A5", opacity: "0.5" },
     },
     focusTarget: "category",
-    colors: ["coral", "LightSkyBlue"],
     lineWidth: 1,
+  };
+
+  const wind_options = {
+    ...base_options,
+    title: "Wind (km/h)",
+    vAxis: {
+      ...base_options.vAxis,
+      format: "###",
+      minValue: 0,
+      viewWindow: { min: 0 },
+    },
+    legend: {
+      position: "bottom",
+      textStyle: { color: "FFFFFF" },
+    },
+    colors: ["coral", "LightSkyBlue"],
   };
 
   const charts = new Array();
@@ -149,69 +156,32 @@ export async function drawCharts(start_day) {
     await drawChart("wind", wind_options, start_ts, end_ts, drawWindArrows),
   );
 
-  var temp_options = {
-    colors: ["LightSkyBlue"],
+  const temp_options = {
+    ...base_options,
     title: "Temperatur (\u00BAC)",
-    titleTextStyle: { color: "FFFFFF" },
-    backgroundColor: "transparent",
-    hAxis: {
-      format: "HH:mm",
-      minValue: new Date(start_ts * 1000),
-      maxValue: new Date(end_ts * 1000),
-      textStyle: { color: "FFFFFF" },
-      gridlines: { color: "444444" },
-    },
     vAxis: {
+      ...base_options.vAxis,
       format: "##",
-      textStyle: { color: "FFFFFF" },
-      gridlines: { color: "444444" },
-      minorGridlines: { color: "666666" },
     },
     legend: { position: "none" },
-    chartArea: { width: "90%" },
-    crosshair: {
-      orientation: "vertical",
-      trigger: "focus",
-      focused: { color: "#A5A5A5", opacity: "0.5" },
-    },
-    focusTarget: "category",
-    lineWidth: 1,
+    colors: ["LightSkyBlue"],
   };
 
   charts.push(await drawChart("temp", temp_options, start_ts, end_ts, null));
 
-var hum_options = {
-    colors: ["LightSkyBlue"],
+  const hum_options = {
+    ...base_options,
     title: "Luftfeuchtigkeit (\u0025)",
-    titleTextStyle: { color: "FFFFFF" },
-    backgroundColor: "transparent",
-    hAxis: {
-      format: "HH:mm",
-      minValue: new Date(start_ts * 1000),
-      maxValue: new Date(end_ts * 1000),
-      textStyle: { color: "FFFFFF" },
-      gridlines: { color: "444444" },
-    },
     vAxis: {
+      ...base_options.vAxis,
       format: "##",
-      textStyle: { color: "FFFFFF" },
-      gridlines: { color: "444444" },
-      minorGridlines: { color: "666666" },
     },
     legend: { position: "none" },
-    chartArea: { width: "90%" },
-    crosshair: {
-      orientation: "vertical",
-      trigger: "focus",
-      focused: { color: "#A5A5A5", opacity: "0.5" },
-    },
-    focusTarget: "category",
-    lineWidth: 1,
+    colors: ["LightSkyBlue"],
   };
 
   charts.push(await drawChart("hum", hum_options, start_ts, end_ts, null));
   return charts;
-
 }
 
 async function drawChart(type, options, start_ts, end_ts, onready) {
