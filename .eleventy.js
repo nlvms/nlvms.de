@@ -117,10 +117,12 @@ module.exports = async function (eleventyConfig) {
     return prefix + "-" + Math.floor(Math.random() * 1000000);
   });
 
-  // Eigener Filter zum Filtern nach Tag
+  // Custom Filter for posts
   eleventyConfig.addFilter("filterByTag", function(collection, tag) {
     if (!tag) return collection;
-    return collection.filter(item => item.data.tags && item.data.tags.includes(tag));
+    return collection.filter(function (item) {
+      return item.data.tags?.includes(tag);
+    });
   });
 
   /* --- BASE CONFIG --- */
