@@ -11,4 +11,6 @@ eleventyImport:
     <i>Sonnenuntergang auf der Heide. Lass uns wieder vom Fliegen träumen.</i>
 </p>
 
-{% include "posts.njk" %}
+<h3>Aktuelles</h3>
+{%- set posts = collections.posts | filterByTag("frontpage") -%}
+{%- include "posts.njk" -%}
