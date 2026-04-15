@@ -2,7 +2,7 @@
 title: ED-R Humboldt
 date: 2026-04-12
 image: /assets/images/20260412-EDRHumboldt.jpg
-tags: 'frontpage'
+tags: ''
 ---
 
 Wegen eines Staatsbesuchs haben wir Flugbeschränkungen. Und zwar vom 14.04.2026, 8 Uhr (MESZ) bis zum 14.04.2026, 24 Uhr (MESZ).
