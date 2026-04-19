@@ -1,5 +1,5 @@
 ---
-title: ED-R Humboldt
+title: ED-R Humboldt am 14. April 2026
 date: 2026-04-12
 image: /assets/images/20260412-EDRHumboldt.jpg
 tags: ''
