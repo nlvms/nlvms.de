@@ -11,6 +11,7 @@ eleventyNavigation:
 
 ### Aktuelle Vereinsinfo
 
+- [Juni 2026](/assets/pdf/2606_DMFV-Vereinsinfo.pdf)
 - [März 2026](/assets/pdf/2603_DMFV-Vereinsinfo.pdf)
 - [Dezember 2025](/assets/pdf/2512_DMFV-Vereinsinfo.pdf)
 - [Oktober 2025](/assets/pdf/2510_DMFV-Vereinsinfo.pdf)
