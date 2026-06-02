@@ -15,7 +15,7 @@ Floyd-L.-Parks-Weg 32
 Markus Trauernicht (Vorsitzender)   
 Harald Huber (1. Stellvertreter)    
 Peter Tokarski (2. Stellvertreter)  
-Thorsten Brandt (Schatzmeister) 
+Thorsten Brandt (Schatzmeister)   
 Sven Aßmuss (Protokollführer)   
 
 #### Kontakt:
