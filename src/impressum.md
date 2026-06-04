@@ -3,15 +3,26 @@ title: Impressum
 layout: narrow
 ---
 
-### Impressum
+### Impressum (Angaben gemäß § 5 DDG)
+<br>
 
-Für den Inhalt dieser Webseite ist allein der **NLV Modellflug Saarmund e.V.**
-verantwortlich.
+**NLV Modellflug Saarmund e. V.**   
+c/o Markus Trauernicht  
+Floyd-L.-Parks-Weg 32   
+14167 Berlin    
 
-#### Vereinsregister
+#### Vertreten durch den Vorstand gemäß § 26 BGB:
+Markus Trauernicht (Vorsitzender)   
+Harald Huber (1. Stellvertreter)    
+Peter Tokarski (2. Stellvertreter)  
+Thorsten Brandt (Schatzmeister)   
+Sven Aßmuss (Protokollführer)   
 
-Amtsgericht Potsdam VR 1933
+#### Kontakt:
+E-Mail: [info@nlvms.de](mailto:info@nlvms.de)   
+Internet: [www.nlvms.de](https://www.nlvms.de)    
 
-#### Kontakt
-
-Email: [info@nlvms.de](mailto:info@nlvms.de)
+#### Registereintrag:
+Eintragung im Vereinsregister   
+Registergericht: Amtsgericht Potsdam    
+Registernummer: VR 1933 P   
