@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
-module.exports = {
+import colors from "tailwindcss/colors";
+export default {
   content: ["./src/**/*.{njk,js,html,md,yml,yaml}"],
   theme: {
     extend: {
