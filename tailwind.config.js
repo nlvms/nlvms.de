@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 import colors from "tailwindcss/colors";
 export default {
-  content: ["./src/**/*.{njk,js,html,md,yml,yaml}"],
+  content: [
+    "./src/**/*.{njk,js,html,md,yml,yaml}",
+    // the {% gallery %} shortcode emits its markup from here, so Tailwind
+    // must scan it or it purges the gallery component classes
+    "./.eleventy.js",
+  ],
   theme: {
     extend: {
       colors: {
