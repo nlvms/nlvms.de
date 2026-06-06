@@ -1,0 +1,32 @@
+name: Build
+
+# Mirrors the Cloudflare Pages build so build breakages are visible in GitHub
+# (red ✗ on the commit/PR + failure email to the committer) without needing
+# access to the Cloudflare dashboard. This does not deploy — Cloudflare still
+# handles that.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
