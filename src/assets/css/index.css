@@ -10,13 +10,14 @@
         user-select: none;
     }
 
-    /* Slides are stacked in one grid cell so the gallery sizes itself to the
-       image without cropping, and we crossfade between them. */
+    /* Slides share one grid cell, so the track keeps a stable height (the
+       tallest image). Shorter / wider images are centred vertically with the
+       page background showing through instead of a black letterbox stripe. */
     .gallery-track {
         display: grid;
+        align-items: center;
         overflow: hidden;
         border-radius: 0.5rem;
-        background: #000;
     }
 
     .gallery-slide {
