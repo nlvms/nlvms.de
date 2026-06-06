@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
     "dev": "npx @11ty/eleventy --serve",
