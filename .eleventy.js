@@ -1,4 +1,5 @@
 import path from "node:path";
+import fs from "node:fs";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import eleventyVitePlugin from "@11ty/eleventy-plugin-vite";
@@ -69,6 +70,84 @@ export default function (eleventyConfig) {
     },
   );
 
+  // Gallery shortcode: turns every image in a directory into an
+  // auto-advancing, one-image-at-a-time slideshow.
+  //   {% gallery "src/assets/images/posts/20260526" %}        // 4s default
+  //   {% gallery "src/assets/images/posts/20260526", 6 %}     // 6s interval
+  const galleryImageExtensions = new Set([
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp",
+    ".gif",
+    ".avif",
+  ]);
+
+  eleventyConfig.addShortcode("gallery", async function (dir, interval = 4) {
+    const absDir = path.resolve(dir);
+    let entries;
+    try {
+      entries = fs.readdirSync(absDir);
+    } catch (err) {
+      throw new Error(
+        `gallery: cannot read directory "${dir}": ${err.message}`,
+      );
+    }
+
+    const images = entries
+      .filter((file) =>
+        galleryImageExtensions.has(path.extname(file).toLowerCase()),
+      )
+      // numeric-aware sort so e.g. 20260524_1651 sorts chronologically
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+    if (images.length === 0) {
+      throw new Error(`gallery: no images found in "${dir}"`);
+    }
+
+    const slides = [];
+    const dots = [];
+    for (let i = 0; i < images.length; i++) {
+      const src = path.join(dir, images[i]);
+      console.log(`Generating gallery image(s) from:  ${src}`);
+      const metadata = await Image(src, {
+        widths: [800, 1500],
+        formats: ["webp", "jpeg"],
+        ...defaultImageOptions,
+      });
+
+      const alt = path
+        .basename(images[i], path.extname(images[i]))
+        .replace(/[-_]+/g, " ");
+      const imgHtml = Image.generateHTML(metadata, {
+        alt,
+        sizes: defaultSizesConfig,
+        loading: i === 0 ? "eager" : "lazy",
+        decoding: "async",
+      });
+
+      const active = i === 0;
+      slides.push(
+        `<figure class="gallery-slide${active ? " is-active" : ""}" aria-hidden="${active ? "false" : "true"}">${imgHtml}</figure>`,
+      );
+      dots.push(
+        `<button type="button" class="gallery-dot${active ? " is-active" : ""}" aria-label="Bild ${i + 1}"${active ? ' aria-current="true"' : ""}></button>`,
+      );
+    }
+
+    const ms = Math.round(Number(interval) * 1000) || 4000;
+    return `<div class="gallery" data-interval="${ms}">
+  <div class="gallery-track">
+    ${slides.join("\n    ")}
+  </div>
+  <button type="button" class="gallery-btn gallery-prev" aria-label="Vorheriges Bild">&lsaquo;</button>
+  <button type="button" class="gallery-btn gallery-next" aria-label="N&auml;chstes Bild">&rsaquo;</button>
+  <div class="gallery-dots">
+    ${dots.join("\n    ")}
+  </div>
+</div>`;
+  });
+
   eleventyConfig.addShortcode("miniature", async function (src) {
     console.log(`Generating miniature(s) from:  ${src}`);
     let metadata = await Image(src, {
@@ -116,7 +195,7 @@ export default function (eleventyConfig) {
   });
 
   // Custom Filter for posts
-  eleventyConfig.addFilter("filterByTag", function(collection, tag) {
+  eleventyConfig.addFilter("filterByTag", function (collection, tag) {
     if (!tag) return collection;
     return collection.filter(function (item) {
       return item.data.tags?.includes(tag);
@@ -136,4 +215,4 @@ export default function (eleventyConfig) {
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
   };
-};
+}
