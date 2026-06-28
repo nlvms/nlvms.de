@@ -2,7 +2,7 @@
 title: Pfingst-Fliegen 2026 | Harald's Flugbuch-Eintrag Teil 1
 date: 2026-05-26
 image: /assets/images/posts/20260526/beaverdhc2.jpg
-tags: 'frontpage'
+tags: ''
 ---
 
 [{% image "src/assets/images/posts/20260526/beaverdhc2.jpg", "Beaver DHC-2 ||| FPV" %}](https://youtu.be/uid_8OI9xrM?is=A7cdWBw6vCiGOzHV)
