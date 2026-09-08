@@ -5,7 +5,7 @@ image: /assets/images/20260412-EDRHumboldt.jpg
 tags: 'frontpage'
 ---
 
-Wegen eines Staatsbesuchs haben wir Flugbeschränkungen. Und zwar vom 09.09.2026, 15 Uhr bis zum 11.09.2026, 12 Uhr (MESZ).
+Wegen eines Staatsbesuchs haben wir Flugbeschränkungen. Und zwar vom 09.09.2026, 15 Uhr bis zum 11.09.2026, 12 Uhr.
 
 Von den Flugbeschränkungen ausgenommen sind u. a.:
 „Flüge von Flugmodellen und unbemannten Luftfahrtsystemen in einer Entfernung von mehr als 10NM um 52 31 34 N 013 22 20 O unter Berücksichtigung der Regelungen des §21h LuftVO und sofern eine Flughöhe von 120m über Grund nicht überschritten wird.“
