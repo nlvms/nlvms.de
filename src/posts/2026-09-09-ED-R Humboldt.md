@@ -2,7 +2,7 @@
 title: ED-R Humboldt vom 09.-11. September 2026
 date: 2026-09-09
 image: /assets/images/20260412-EDRHumboldt.jpg
-tags: 'frontpage'
+tags: ''
 ---
 
 Wegen eines Staatsbesuchs haben wir Flugbeschränkungen. Und zwar vom 09.09.2026, 15 Uhr bis zum 11.09.2026, 12 Uhr.
