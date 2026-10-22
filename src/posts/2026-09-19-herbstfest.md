@@ -2,7 +2,7 @@
 title: Herbstfest 2026 | Harald's Flugbuch-Eintrag Teil 2
 date: 2026-09-19
 image: /assets/images/posts/20260919/20260919.jpg
-tags: 'frontpage'
+tags: ''
 ---
 
 Hallo Vereinsfreunde,
