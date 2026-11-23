@@ -2,7 +2,7 @@
 title: ED-R Humboldt vom 19.-20. November 2026
 date: 2026-11-13
 image: /assets/images/20260412-EDRHumboldt.jpg
-tags: 'frontpage'
+tags: ''
 ---
 
 Wegen eines Staatsbesuchs haben wir Flugbeschränkungen. Und zwar vom 19.11.2026 bis zum 20.11.2026.
